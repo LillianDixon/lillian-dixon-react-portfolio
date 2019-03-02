@@ -4,8 +4,8 @@ import axios from "axios";
 import PortfolioItem from "./portfolio-item";
 
 export default class PortfolioContainer extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       pageTitle: "Welcome to my portfolio",
@@ -14,7 +14,7 @@ export default class PortfolioContainer extends Component {
     };
 
     this.handleFilter = this.handleFilter.bind(this);
-    }
+  }
 
   handleFilter(filter) {
     this.setState({
@@ -25,8 +25,7 @@ export default class PortfolioContainer extends Component {
   }
 
   getPortfolioItems() {
-    axios
-      .get("https://lilliandixon.devcamp.space/portfolio/portfolio_items")
+    axios.get("https://jordan.devcamp.space/portfolio/portfolio_items")
       .then(response => {
         this.setState({
           data: response.data.portfolio_items
@@ -39,14 +38,7 @@ export default class PortfolioContainer extends Component {
 
   portfolioItems() {
     return this.state.data.map(item => {
-      return (
-        <PortfolioItem
-          key={item.id}
-          title={item.name}
-          url={item.url}
-          slug={item.id}
-        />
-      );
+      return <PortfolioItem key={item.id} item={item} />;
     });
   }
 
@@ -73,7 +65,8 @@ export default class PortfolioContainer extends Component {
           Enterprise
         </button>
 
-        {this.portfolioItems()}
+        <div className="portfolio-items-wrapper">{this.portfolioItems()}</div>
+        
       </div>
     );
   }
