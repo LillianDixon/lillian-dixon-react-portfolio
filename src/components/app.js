@@ -114,7 +114,7 @@ export default class App extends Component {
               ) : null}
               <Route
                 exact
-                path="/portfolio/:slug"
+                path="/portfolio/:slug" 
                 component={PortfolioDetail}
               />
               <Route component={NoMatch} />
